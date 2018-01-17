@@ -30,6 +30,20 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+// Options for PostCSS as we reference these options twice
+// Adds vendor prefixing to support IE9 and above
+const postCSSLoaderOptions = {
+  // Necessary for external CSS imports to work
+  // https://github.com/facebookincubator/create-react-app/issues/2677
+  ident: 'postcss',
+  plugins: () => [
+    require('postcss-flexbugs-fixes'),
+    autoprefixer({
+      flexbox: 'no-2009',
+    }),
+  ],
+};
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -123,7 +137,7 @@ module.exports = {
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-      new TsconfigPathsPlugin({configFile: paths.appTsConfig})
+      new TsconfigPathsPlugin({ configFile: paths.appTsConfig }),
     ],
   },
   module: {
@@ -176,6 +190,7 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
+            exclude: /\.module\.css$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -186,30 +201,34 @@ module.exports = {
               },
               {
                 loader: require.resolve('postcss-loader'),
-                options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
-                  ident: 'postcss',
-                  plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
-                      ],
-                      flexbox: 'no-2009',
-                    }),
-                  ],
-                },
+                options: postCSSLoaderOptions,
               },
             ],
           },
-
+          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+          // using the extension .module.css
+          {
+            test: /\.module\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  modules: true,
+                  localIdentName: '[path]__[name]___[local]',
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+            ],
+          },
           // BIKO::START
           {
             test: /\.scss$/,
+            exclude: /\.module\.scss$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -220,23 +239,26 @@ module.exports = {
               },
               {
                 loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+              require.resolve('sass-loader'),
+            ],
+          },
+          {
+            test: /\.module\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
                 options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
-                  ident: 'postcss',
-                  plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
-                      ],
-                      flexbox: 'no-2009',
-                    }),
-                  ],
+                  importLoaders: 1,
+                  modules: true,
+                  localIdentName: '[path]__[name]___[local]',
                 },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
               },
               require.resolve('sass-loader'),
             ],
