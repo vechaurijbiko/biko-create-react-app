@@ -208,6 +208,7 @@ module.exports = function(
   }
   console.log();
   console.log('Happy hacking!');
+  console.log(chalk.red('-- Biko -------------------------'));
 };
 
 function isReactInstalled(appPackage) {
