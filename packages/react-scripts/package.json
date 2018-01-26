@@ -53,8 +53,10 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
+    "node-sass": "^4.7.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "sass-loader": "^6.0.6",
     "typescript": "2.x"
   },
   "peerDependencies": {},
