@@ -212,11 +212,13 @@ module.exports = {
             use: [
               require.resolve('style-loader'),
               {
-                loader: require.resolve('css-loader'),
+                loader: require.resolve('typings-for-css-modules-loader'),
                 options: {
                   importLoaders: 1,
                   modules: true,
-                  localIdentName: '[path]__[name]___[local]',
+                  camelCase: true,
+                  namedExport: true,
+                  localIdentName: '[name]_[local]_[hash:base64:5]',
                 },
               },
               {
@@ -225,6 +227,58 @@ module.exports = {
               },
             ],
           },
+          //BIKO:START
+          // "postcss" loader applies autoprefixer to our CSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "style" loader turns CSS into JS modules that inject <style> tags.
+          // In production, we use a plugin to extract that CSS to a file, but
+          // in development "style" loader enables hot editing of CSS.
+          {
+            test: /\.scss$/,
+            exclude: /\.module\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 2,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+              {
+                loader: require.resolve('sass-loader'),
+              },
+            ],
+          },
+          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+          // using the extension .module.scss
+          {
+            test: /\.module\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('typings-for-css-modules-loader'),
+                options: {
+                  importLoaders: 2,
+                  modules: true,
+                  camelCase: true,
+                  namedExport: true,
+                  localIdentName: '[name]_[local]_[hash:base64:5]',
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: postCSSLoaderOptions,
+              },
+              {
+                loader: require.resolve('sass-loader'),
+              },
+            ],
+          },
+          //BIKO:END
 
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
