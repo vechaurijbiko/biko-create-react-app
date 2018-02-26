@@ -25,5 +25,6 @@ In general, most upgrades won't require any migration steps to work, but if you 
 
 ### 0.4.0
 * Añadida configuración de Prettier al template
+* Añadido soporte para módulos CSS para ficheros `.module.css` y `.module.scss`
 ### 0.3.1
 * Añadido soporte de SASS
