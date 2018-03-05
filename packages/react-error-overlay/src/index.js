@@ -64,18 +64,15 @@ export function startReportingRuntimeErrors(options: RuntimeReportingOptions) {
     );
   }
   currentRuntimeErrorOptions = options;
-  listenToRuntimeErrors(
-    errorRecord => {
-      try {
-        if (typeof options.onError === 'function') {
-          options.onError.call(null);
-        }
-      } finally {
-        handleRuntimeError(errorRecord);
+  stopListeningToRuntimeErrors = listenToRuntimeErrors(errorRecord => {
+    try {
+      if (typeof options.onError === 'function') {
+        options.onError.call(null);
       }
-    },
-    options.filename
-  );
+    } finally {
+      handleRuntimeError(errorRecord);
+    }
+  }, options.filename);
 }
 
 function handleRuntimeError(errorRecord) {
@@ -90,7 +87,7 @@ function handleRuntimeError(errorRecord) {
   update();
 }
 
-function dismissRuntimeErrors() {
+export function dismissRuntimeErrors() {
   currentRuntimeErrorRecords = [];
   update();
 }
@@ -163,8 +160,8 @@ function updateIframeContent() {
   }
 }
 
-window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ = window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ || {
-};
+window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ =
+  window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ || {};
 window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady = function iframeReady() {
   isIframeReady = true;
   isLoadingIframe = false;
