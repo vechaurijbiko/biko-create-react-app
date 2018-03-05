@@ -69,6 +69,11 @@ const postCSSLoaderOptions = {
   ],
 };
 
+//BIKO:START
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+//BIKO:END
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -499,6 +504,42 @@ module.exports = {
     }),
 
     new webpack.WatchIgnorePlugin([/module.css\.d\.ts$/]),
+
+    //BIKO:START
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      defaultSizes: 'gzip',
+      openAnalyzer: false,
+    }),
+
+    // Extrae las librerías de node_modules a este este chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function(module) {
+        // This prevents stylesheet resources with the .css or .scss extension
+        // from being moved from their original chunk to the vendor chunk
+        if (module.resource && /^.*\.(css|scss)$/.test(module.resource)) {
+          return false;
+        }
+
+        return module.context && module.context.includes('node_modules');
+      },
+    }),
+
+    // Cualquier módulo compartido entre chunks acabará en su propio chunk
+    // asíncrono
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      minChunks: 2,
+      async: true, // crea un chunk con carga asíncrona de este código
+    }),
+
+    // Estrae el código de bootstrap de webpack a su propio bundle
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity,
+    }),
+    //BIKO:END
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

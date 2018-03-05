@@ -151,6 +151,8 @@ To fix this, create a new file *in the root of the project* called `tsconfig.tes
 
 ### 0.5.0
 * Actualizado a react-scripts v1.1.1
+* Nueva configuración para separar en chunks el contenido de "node_modules", la configuración del "manifest" y los common chunks
+* Incorporada herramienta para el análisis de los chunks. En la compilación a producción generar un informe en .html
 
 ### 0.4.0
 * Añadida configuración de Prettier al template

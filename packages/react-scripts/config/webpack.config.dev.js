@@ -44,6 +44,11 @@ const postCSSLoaderOptions = {
   ],
 };
 
+//BIKO:START
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+//BIKO:END
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -80,7 +85,7 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'static/js/[name].js',
     // There are also additional JS chunk files if you use code splitting.
     chunkFilename: 'static/js/[name].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
@@ -355,6 +360,40 @@ module.exports = {
       tsconfig: paths.appTsConfig,
       tslint: paths.appTsLint,
     }),
+
+    //BIKO:START
+    // Lanza una utilidad para analizar los bundles y chunks en el puerto :8888
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
+    // Extrae las librerías de node_modules a este este chunk
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function(module) {
+        // This prevents stylesheet resources with the .css or .scss extension
+        // from being moved from their original chunk to the vendor chunk
+        if (module.resource && /^.*\.(css|scss)$/.test(module.resource)) {
+          return false;
+        }
+
+        return module.context && module.context.includes('node_modules');
+      },
+    }),
+
+    // Cualquier módulo compartido entre chunks acabará en su propio chunk
+    // asíncrono
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      minChunks: 2,
+      async: true, // crea un chunk con carga asíncrona de este código
+    }),
+
+    // Estrae el código de bootstrap de webpack a su propio bundle
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity,
+    }),
+    //BIKO:END
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
