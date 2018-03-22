@@ -46,6 +46,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
       '^.+\\.module\\.css$': 'identity-obj-proxy',
+      '^$(.*)/(.*)': '<rootDir>/src/$1/$2',
     },
     moduleFileExtensions: [
       'mjs',
@@ -71,6 +72,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
   }
   const overrides = Object.assign({}, require(paths.appPackageJson).jest);
   const supportedKeys = [
+    'moduleNameMapper',
     'collectCoverageFrom',
     'coverageReporters',
     'coverageThreshold',
