@@ -149,6 +149,9 @@ To fix this, create a new file *in the root of the project* called `tsconfig.tes
 
 ## Changelog
 
+### 0.5.3
+* Nueva opción de configuración para la tarea 'build', llamada 'JS_SOURCEMAPS_ARE_HIDDEN' donde TRUE genera sourcemaps pero no enlazados en los ficheros javascript.
+
 ### 0.5.0
 * Actualizado a react-scripts v1.1.1
 * Nueva configuración para separar en chunks el contenido de "node_modules", la configuración del "manifest" y los common chunks
