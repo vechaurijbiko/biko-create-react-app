@@ -77,6 +77,12 @@ const postCSSLoaderOptions = {
 //BIKO:START
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+
+const loadCustomizer = require('./loadCustomizer');
+
+const webpackExtension = loadCustomizer(
+  path.resolve(paths.appPath, 'webpack.config.prod.extension.js')
+);
 //BIKO:END
 
 // This is the production configuration.
@@ -178,6 +184,10 @@ module.exports = {
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
         oneOf: [
+          //BIKO:START
+          ...webpackExtension.getRules(), // Añade las reglas extendidas a webpack
+          //BIKO:END
+
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
           {
