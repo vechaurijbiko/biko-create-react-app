@@ -1,6 +1,6 @@
 {
   "name": "@biko/react-scripts",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Configuration and scripts for Create React App for Biko",
   "repository": "biko2/biko-create-react-app",
   "license": "BSD-3-Clause",

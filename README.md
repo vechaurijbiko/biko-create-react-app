@@ -149,6 +149,17 @@ To fix this, create a new file *in the root of the project* called `tsconfig.tes
 
 ## Changelog
 
+### 0.6.0
+* Añade la posibilidad de añadir nuevas reglas a webpack a través de ficheros en el raiz del proyecto con el nombre: `webpack.config.dev.extension.js` y `webpack.config.prod.extension.js`
+El formato de los ficheros es:
+```
+module.exports = {
+  getRules: function() {
+    return [];
+  },
+};
+```
+
 ### 0.5.3
 * Nueva opción de configuración para la tarea 'build', llamada 'JS_SOURCEMAPS_ARE_HIDDEN' donde TRUE genera sourcemaps pero no enlazados en los ficheros javascript.
 
