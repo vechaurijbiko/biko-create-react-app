@@ -4,7 +4,7 @@ module.exports = function loadCustomizer(modulePath) {
   try {
     const moduleDefault = require(modulePath);
 
-    console.log(`Extending webpack prod config from: ${modulePath}`);
+    console.log(`Extending webpack config from: ${modulePath}`);
 
     return moduleDefault;
   } catch (e) {
