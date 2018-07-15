@@ -53,6 +53,21 @@ const loadCustomizer = require('./loadCustomizer');
 const webpackExtension = loadCustomizer(
   path.resolve(paths.appPath, 'webpack.config.dev.extension.js')
 );
+
+// Añade información del componente a los nombres de los estilos
+// 1. import default from the plugin module
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
+  .default;
+
+// 2. create a transformer;
+// the factory additionally accepts an options object which described below
+const styledComponentsTransformer = createStyledComponentsTransformer(
+  {
+    // getDisplayName: function(filename, bindingName) {
+    //   return bindingName
+    // },
+  }
+);
 //BIKO:END
 
 // This is the development configuration.
@@ -208,6 +223,9 @@ module.exports = {
                 options: {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
+                  getCustomTransformers: () => ({
+                    before: [styledComponentsTransformer],
+                  }),
                 },
               },
             ],
