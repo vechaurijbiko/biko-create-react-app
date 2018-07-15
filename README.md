@@ -149,6 +149,9 @@ To fix this, create a new file *in the root of the project* called `tsconfig.tes
 
 ## Changelog
 
+### 0.7.0
+* Añade un transformador para `ts-loader` que, en desarrollo, añade el nombre del componente al nombre del estilo de styled-componented para facilitar su depuración.
+
 ### 0.6.0
 * Añade la posibilidad de añadir nuevas reglas a webpack a través de ficheros en el raiz del proyecto con el nombre: `webpack.config.dev.extension.js` y `webpack.config.prod.extension.js`
 El formato de los ficheros es:
