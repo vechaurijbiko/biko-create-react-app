@@ -557,6 +557,8 @@ module.exports = {
       name: 'manifest',
       minChunks: Infinity,
     }),
+
+    ...webpackExtension.getPlugins(),
     //BIKO:END
   ],
   // Some libraries import Node modules but don't use them in the browser.
