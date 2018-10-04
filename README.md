@@ -155,6 +155,24 @@ To fix this, create a new file _in the root of the project_ called `tsconfig.tes
 - Ahora prettier elimina los semicolons al final de las líneas
 - Actualizada la plantilla base de ficheros
 
+### 0.8.0
+
+- Añade la posibilidad de añadir nuevos plugins a webpack a través de ficheros en el raiz del proyecto con el nombre: `webpack.config.dev.extension.js` y `webpack.config.prod.extension.js`
+  El formato completo de los ficheros se actualiza a:
+
+```
+module.exports = {
+  getRules: function() {
+    return [];
+  },
+  getPlugins: function() {
+    return [];
+  },
+};
+```
+
+Además, con el cambio realizado a partir de ahora los métodos de extension son opcionales y no es obligatorio definirlos si no es necesario.
+
 ### 0.7.0
 
 - Añade un transformador para `ts-loader` que, en desarrollo, añade el nombre del componente al nombre del estilo de styled-componented para facilitar su depuración.

@@ -6,29 +6,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
+'use strict'
 
-const autoprefixer = require('autoprefixer');
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const getClientEnvironment = require('./env');
-const paths = require('./paths');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const autoprefixer = require('autoprefixer')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const getClientEnvironment = require('./env')
+const paths = require('./paths')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-const publicPath = '/';
+const publicPath = '/'
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
-const publicUrl = '';
+const publicUrl = ''
 // Get environment variables to inject into our app.
-const env = getClientEnvironment(publicUrl);
+const env = getClientEnvironment(publicUrl)
 
 // Options for PostCSS as we reference these options twice
 // Adds vendor prefixing to support IE9 and above
@@ -42,22 +42,22 @@ const postCSSLoaderOptions = {
       flexbox: 'no-2009',
     }),
   ],
-};
+}
 
 //BIKO:START
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+  .BundleAnalyzerPlugin
 
-const loadCustomizer = require('./loadCustomizer');
+const loadCustomizer = require('./loadCustomizer')
 
 const webpackExtension = loadCustomizer(
   path.resolve(paths.appPath, 'webpack.config.dev.extension.js')
-);
+)
 
 // Añade información del componente a los nombres de los estilos
 // 1. import default from the plugin module
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
-  .default;
+  .default
 
 // 2. create a transformer;
 // the factory additionally accepts an options object which described below
@@ -67,7 +67,7 @@ const styledComponentsTransformer = createStyledComponentsTransformer(
     //   return bindingName
     // },
   }
-);
+)
 //BIKO:END
 
 // This is the development configuration.
@@ -402,10 +402,10 @@ module.exports = {
         // This prevents stylesheet resources with the .css or .scss extension
         // from being moved from their original chunk to the vendor chunk
         if (module.resource && /^.*\.(css|scss)$/.test(module.resource)) {
-          return false;
+          return false
         }
 
-        return module.context && module.context.includes('node_modules');
+        return module.context && module.context.includes('node_modules')
       },
     }),
 
@@ -422,6 +422,8 @@ module.exports = {
       name: 'manifest',
       minChunks: Infinity,
     }),
+
+    ...webpackExtension.getPlugins(),
     //BIKO:END
   ],
   // Some libraries import Node modules but don't use them in the browser.
@@ -439,4 +441,4 @@ module.exports = {
   performance: {
     hints: false,
   },
-};
+}
