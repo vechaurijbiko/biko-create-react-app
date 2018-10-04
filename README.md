@@ -2,8 +2,8 @@
 
 Create React apps (with Typescript) with no build configuration.
 
-* [Creating an App](#creating-an-app) – How to create a new app.
-* [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
+- [Creating an App](#creating-an-app) – How to create a new app.
+- [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
 
 _Do you know react and want to try out typescript? Or do you know typescript and want to try out react?_ Get all the benefits from `create-react-app` but you use typescript! 🚀
 
@@ -15,7 +15,7 @@ cd my-app
 npm start
 ```
 
-*([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 When you’re ready to deploy to production, create a minified bundle with `npm run build`.
@@ -40,9 +40,10 @@ To create a new app, run a single command:
 npx create-react-app my-app
 ```
 
-*([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))*
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
 Using `yarn`:
+
 ```
 yarn add -D typescript
 ```
@@ -145,16 +146,24 @@ Test suite failed to run
 }
 ```
 
-To fix this, create a new file *in the root of the project* called `tsconfig.test.json`, and paste [the content of this file into it](https://raw.githubusercontent.com/wmonk/create-react-app-typescript/master/packages/react-scripts/template/tsconfig.test.json). Everything should work now. For more info, please see [this issue](https://github.com/wmonk/create-react-app-typescript/issues/141).
+To fix this, create a new file _in the root of the project_ called `tsconfig.test.json`, and paste [the content of this file into it](https://raw.githubusercontent.com/wmonk/create-react-app-typescript/master/packages/react-scripts/template/tsconfig.test.json). Everything should work now. For more info, please see [this issue](https://github.com/wmonk/create-react-app-typescript/issues/141).
 
 ## Changelog
 
+### 0.9.0
+
+- Ahora prettier elimina los semicolons al final de las líneas
+- Actualizada la plantilla base de ficheros
+
 ### 0.7.0
-* Añade un transformador para `ts-loader` que, en desarrollo, añade el nombre del componente al nombre del estilo de styled-componented para facilitar su depuración.
+
+- Añade un transformador para `ts-loader` que, en desarrollo, añade el nombre del componente al nombre del estilo de styled-componented para facilitar su depuración.
 
 ### 0.6.0
-* Añade la posibilidad de añadir nuevas reglas a webpack a través de ficheros en el raiz del proyecto con el nombre: `webpack.config.dev.extension.js` y `webpack.config.prod.extension.js`
-El formato de los ficheros es:
+
+- Añade la posibilidad de añadir nuevas reglas a webpack a través de ficheros en el raiz del proyecto con el nombre: `webpack.config.dev.extension.js` y `webpack.config.prod.extension.js`
+  El formato de los ficheros es:
+
 ```
 module.exports = {
   getRules: function() {
@@ -164,34 +173,39 @@ module.exports = {
 ```
 
 ### 0.5.3
-* Nueva opción de configuración para la tarea 'build', llamada 'JS_SOURCEMAPS_ARE_HIDDEN' donde TRUE genera sourcemaps pero no enlazados en los ficheros javascript.
+
+- Nueva opción de configuración para la tarea 'build', llamada 'JS_SOURCEMAPS_ARE_HIDDEN' donde TRUE genera sourcemaps pero no enlazados en los ficheros javascript.
 
 ### 0.5.0
-* Actualizado a react-scripts v1.1.1
-* Nueva configuración para separar en chunks el contenido de "node_modules", la configuración del "manifest" y los common chunks
-* Incorporada herramienta para el análisis de los chunks. En la compilación a producción generar un informe en .html
+
+- Actualizado a react-scripts v1.1.1
+- Nueva configuración para separar en chunks el contenido de "node_modules", la configuración del "manifest" y los common chunks
+- Incorporada herramienta para el análisis de los chunks. En la compilación a producción generar un informe en .html
 
 ### 0.4.0
-* Añadida configuración de Prettier al template
-* Añadido soporte para módulos CSS para ficheros `.module.css` y `.module.scss`
-### 0.3.1
-* Añadido soporte de SASS
-* **No Configuration Required:** You don't need to configure anything. Reasonably good configuration of both development and production builds is handled for you so you can focus on writing code.
 
-* **No Lock-In:** You can “eject” to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.
+- Añadida configuración de Prettier al template
+- Añadido soporte para módulos CSS para ficheros `.module.css` y `.module.scss`
+
+### 0.3.1
+
+- Añadido soporte de SASS
+- **No Configuration Required:** You don't need to configure anything. Reasonably good configuration of both development and production builds is handled for you so you can focus on writing code.
+
+- **No Lock-In:** You can “eject” to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.
 
 ## What’s Included?
 
 Your environment will have everything you need to build a modern single-page React app:
 
-* React, JSX, ES6, and Flow syntax support.
-* Language extras beyond ES6 like the object spread operator.
-* Autoprefixed CSS, so you don’t need `-webkit` or other prefixes.
-* A fast interactive unit test runner with built-in support for coverage reporting.
-* A live development server that warns about common mistakes.
-* A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps.
-* An offline-first [service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) and a [web app manifest](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/), meeting all the [Progressive Web App](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) criteria.
-* Hassle-free updates for the above tools with a single dependency.
+- React, JSX, ES6, and Flow syntax support.
+- Language extras beyond ES6 like the object spread operator.
+- Autoprefixed CSS, so you don’t need `-webkit` or other prefixes.
+- A fast interactive unit test runner with built-in support for coverage reporting.
+- A live development server that warns about common mistakes.
+- A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps.
+- An offline-first [service worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) and a [web app manifest](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/), meeting all the [Progressive Web App](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) criteria.
+- Hassle-free updates for the above tools with a single dependency.
 
 Check out [this guide](https://github.com/nitishdayal/cra_closer_look) for an overview of how these tools fit together.
 
@@ -201,25 +215,25 @@ The tradeoff is that **these tools are preconfigured to work in a specific way**
 
 Create React App is a great fit for:
 
-* **Learning React** in a comfortable and feature-rich development environment.
-* **Starting new single-page React applications.**
-* **Creating examples** with React for your libraries and components.
+- **Learning React** in a comfortable and feature-rich development environment.
+- **Starting new single-page React applications.**
+- **Creating examples** with React for your libraries and components.
 
 Here’s a few common cases where you might want to try something else:
 
-* If you want to **try React** without hundreds of transitive build tool dependencies, consider [using a single HTML file or an online sandbox instead](https://reactjs.org/docs/try-react.html).
+- If you want to **try React** without hundreds of transitive build tool dependencies, consider [using a single HTML file or an online sandbox instead](https://reactjs.org/docs/try-react.html).
 
-* If you need to **integrate React code with a server-side template framework** like Rails or Django, or if you’re **not building a single-page app**, consider using [nwb](https://github.com/insin/nwb) or [Neutrino](https://neutrino.js.org/) which are more flexible.
+- If you need to **integrate React code with a server-side template framework** like Rails or Django, or if you’re **not building a single-page app**, consider using [nwb](https://github.com/insin/nwb) or [Neutrino](https://neutrino.js.org/) which are more flexible.
 
-* If you need to **publish a React component**, [nwb](https://github.com/insin/nwb) can [also do this](https://github.com/insin/nwb#react-components-and-libraries), as well as [Neutrino's react-components preset](https://neutrino.js.org/packages/react-components/).
+- If you need to **publish a React component**, [nwb](https://github.com/insin/nwb) can [also do this](https://github.com/insin/nwb#react-components-and-libraries), as well as [Neutrino's react-components preset](https://neutrino.js.org/packages/react-components/).
 
-* If you want to do **server rendering** with React and Node.js, check out [Next.js](https://github.com/zeit/next.js/) or [Razzle](https://github.com/jaredpalmer/razzle). Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
+- If you want to do **server rendering** with React and Node.js, check out [Next.js](https://github.com/zeit/next.js/) or [Razzle](https://github.com/jaredpalmer/razzle). Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
 
-* If your website is **mostly static** (for example, a portfolio or a blog), consider using [Gatsby](https://www.gatsbyjs.org/) instead. Unlike Create React App, it pre-renders the website into HTML at the build time.
+- If your website is **mostly static** (for example, a portfolio or a blog), consider using [Gatsby](https://www.gatsbyjs.org/) instead. Unlike Create React App, it pre-renders the website into HTML at the build time.
 
-* If you want to use **TypeScript**, consider using [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript).
+- If you want to use **TypeScript**, consider using [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript).
 
-* Finally, if you need **more customization**, check out [Neutrino](https://neutrino.js.org/) and its [React preset](https://neutrino.js.org/packages/react/).
+- Finally, if you need **more customization**, check out [Neutrino](https://neutrino.js.org/) and its [React preset](https://neutrino.js.org/packages/react/).
 
 All of the above tools can work with little to no configuration.
 
@@ -238,6 +252,6 @@ Check out [Create React Native App](https://github.com/react-community/create-re
 
 We are grateful to the authors of existing related projects for their ideas and collaboration:
 
-* [@eanplatter](https://github.com/eanplatter)
-* [@insin](https://github.com/insin)
-* [@mxstbr](https://github.com/mxstbr)
+- [@eanplatter](https://github.com/eanplatter)
+- [@insin](https://github.com/insin)
+- [@mxstbr](https://github.com/mxstbr)
