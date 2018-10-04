@@ -13,15 +13,10 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "paths": {
-      "$*": [
-        "src/*"
-      ]
-    }
+    "noUnusedLocals": true
   },
   "exclude": [
     "node_modules",
