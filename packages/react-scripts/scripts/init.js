@@ -188,6 +188,16 @@ module.exports = function(
   console.log(chalk.cyan(`  ${displayedCommand} start`))
   console.log('    Starts the development server.')
   console.log()
+  console.log(
+    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}start-storybook`)
+  )
+  console.log('    Starts the storybook tools to build components.')
+  console.log()
+  console.log(
+    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build-storybook`)
+  )
+  console.log('    Build static site with storybook content.')
+  console.log()
   console.log(chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`))
   console.log('    Bundles the app into static files for production.')
   console.log()
