@@ -10,7 +10,13 @@
   "bugs": {
     "url": "https://github.com/wmonk/create-react-app/issues"
   },
-  "files": ["bin", "config", "scripts", "template", "utils"],
+  "files": [
+    "bin",
+    "config",
+    "scripts",
+    "template",
+    "utils"
+  ],
   "bin": {
     "react-scripts": "./bin/react-scripts.js"
   },
@@ -67,7 +73,8 @@
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "3.1.6",
     "webpack-manifest-plugin": "1.3.2",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "react": "^15.5.4",
@@ -77,5 +84,10 @@
   "peerDependencies": {},
   "optionalDependencies": {
     "fsevents": "^1.1.3"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
